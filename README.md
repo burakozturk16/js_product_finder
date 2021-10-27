@@ -11,16 +11,16 @@
 init finder
 
 ```javascript
-const productFinder = new Finder(products);
+var productFinder = new Finder(products);
 // OR
-const productFinder = new ProductFinder();
+var productFinder = new ProductFinder();
 productFinder.loadProducts(products);
 ```
 
 Schema of products
 
 ```javascript
-const products = [
+var products = [
  "name": String,
  "properties": [String],
  "price": Number,
@@ -44,9 +44,9 @@ Also, you can add custom fields
 Initialize
 
 ```javascript
-const productSnippet = new Snippet(products);
+var productSnippet = new Snippet(products);
 // OR
-const productSnippet = new Snippet();
+var productSnippet = new Snippet();
 productSnippet.loadProducts(products);
 ```
 
