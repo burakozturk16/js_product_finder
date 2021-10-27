@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../finder.js"></script>
+    <title>finder example</title>
+</head>
+<body>
+
+<h3>Products array filled from our api with 2</h3>
+<pre style="background: #424242; color: #fff">
+    var products = [
+        {
+            "collection": "beads",
+            "name": "beads title",
+            "properties": ["material_silver 925", "weight_17g"],
+            "data": {
+                "background": "placeholder.png"
+            },
+            "price": 280,
+            "discount": false
+        },
+        {
+            "collection": "beads",
+            "name": "second beads title",
+            "properties": ["material_silver 925", "weight_15g"],
+            "data": {
+                "background": "placeholder.png"
+            },
+            "price": 500,
+            "discount": 250
+        }
+    ];
+</pre>
+
+<br/>
+
+<h3>Filters applied</h3>
+<pre style="background: #424242; color: #fff">
+    Snippet.setFilter("discount", "50%");
+    Snippet.setFilter("price", "100:300");
+    Snippet.setFilter("property", "material_silver 925");
+</pre>
+
+<br/>
+
+<h3>Results</h3>
+<pre id="results"></pre>
+
+
+<script>
+    var products = [
+        {
+            "collection": "beads",
+            "name": "beads title",
+            "properties": ["material_silver 925", "weight_17g"],
+            "data": {
+                "background": "placeholder.png"
+            },
+            "price": 280,
+            "discount": 0
+        },
+        {
+            "collection": "beads",
+            "name": "second beads title",
+            "properties": ["material_silver 925", "weight_15g"],
+            "data": {
+                "background": "placeholder.png"
+            },
+            "price": 500,
+            "discount": 250
+        }
+    ];
+
+    var finderApi = new Finder();
+    finderApi.loadProducts(products);
+    finderApi.setFilter("discount", "50%");
+    finderApi.setFilter("price", "100:300");
+    finderApi.setFilter("property", "material_silver 925");
+
+    window.onload = function(){
+        var products = finderApi.get();
+
+        document.getElementById('results').innerHTML = JSON.stringify(products);
+    }
+</script>
+</body>
+</html>

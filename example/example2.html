@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Snippet  example</title>
+</head>
+<body>
+
+<div id="select">
+    Filters:
+    <button class="productfinder-dom" pf-dom-active="active" pf-dom-property="material_silver 925">Silver 925</button>
+    <button class="productfinder-dom" pf-dom-active="active" pf-dom-property="material_silver 935">Silver 935</button>
+    <button class="productfinder-dom" pf-dom-active="active" pf-dom-price="250">250€</button>
+    <button class="productfinder-dom" pf-dom-active="active" pf-dom-discount="50%">-50%</button>
+</div>
+
+<div id="results"></div>
+
+<script src="../finder.js"></script>
+<script src="../snippet.js"></script>
+
+<script>
+    var products = [
+        {
+            "collection": "beads",
+            "name": "beads title",
+            "properties": ["material_silver 925", "weight_17g"],
+            "data": {
+                "background": "placeholder.png"
+            },
+            "price": 280,
+            "discount": false
+        },
+        {
+            "collection": "beads",
+            "name": "second beads title",
+            "properties": ["material_silver 925", "weight_15g"],
+            "data": {
+                "background": "placeholder.png"
+            },
+            "price": 500,
+            "discount": 250
+        },
+        {
+            "collection": "beads",
+            "name": "other beads title",
+            "properties": ["material_silver 935", "weight_15g"],
+            "data": {
+                "background": "placeholder.png"
+            },
+            "price": 400,
+            "discount": 250
+        }
+    ];
+
+    function display(products){
+        let html = "";
+        products.forEach(product => {
+            html += `<div>${product.name} | ${product.discount ? `<del>${product.price}€</del> -> ` : ""} ${product.discount ? product.discount : product.price}€ | (${product.properties.join(";")})</div>`
+        });
+
+        document.getElementById("results").innerHTML = html;
+    }
+
+    var finderSnippet = new Snippet();
+    finderSnippet.loadProducts(products);
+    finderSnippet.elementFinder();
+
+    finderSnippet.onChange(() => {
+        display(finderSnippet.get());
+    });
+
+    window.onload = function (){
+        display(finderSnippet.get());
+    }
+</script>
+</body>
+</html>
